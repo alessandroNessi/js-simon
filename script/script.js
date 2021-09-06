@@ -1,7 +1,7 @@
 /*global var */
 var aiNumbers=[];
 var userNumbers=[];
-var timeout=30000;
+var timeout=3000;
 /**function that flip cards */
 function flipCards(cards,type){
     if(type=="front"){
@@ -34,7 +34,7 @@ function checkArray(string, array, cut){
 }
 document.getElementById("play").addEventListener("mousedown",function(){
     let cards=document.getElementsByClassName("cardFrame");
-    
+    document.getElementById("play").classList.add("d-none");
     /*populate cards numbers */
     for(let i=0;i<cards.length;i++){
         let temp=randomNumber(1,100);    
@@ -55,22 +55,27 @@ document.getElementById("play").addEventListener("mousedown",function(){
 
     setTimeout(function(){
         let result=1, num, i=0;
-        // alert (userNumbers.length);
-        while(result==1 && aiNumbers.length>0){
-            num=parseInt(prompt(`inserisci il ${i+1} numero: `));
+        document.getElementById("inpuNumber").classList.remove("d-none");
+        document.getElementById("check").classList.remove("d-none");
+        document.getElementById("check").addEventListener("mousedown", function(){
+            num=parseInt(document.getElementById("inpuNumber").value);
+            console.log(num);
             if(checkArray(num,aiNumbers,true)){
                 userNumbers.push(num);
                 i++;
             }else{
                 result=0;
             }
-        }
-        if(result==1){
-            alert("Gj, you won! All the numbers are correct!");
-        }else{
-            let stringNumbers=userNumbers.join(" , ");
-            alert(`You lost! The number ${num} was not in the cards!; ${userNumbers.length}/5 have been insered correctly: ${stringNumbers};`);
-        }
-        location.reload();
+            if(result==1 && aiNumbers.length==0){
+                alert("Gj, you won! All the numbers are correct!");
+                location.reload();
+            }else if(result==0){
+                let stringNumbers=userNumbers.join(" , ");
+                alert(`You lost! The number ${num} was not in the cards!; ${userNumbers.length}/5 have been insered correctly: ${stringNumbers};`);
+            location.reload();
+            }else{
+                document.getElementById("inpuNumber").value="";
+            }
+        });
     },timeout+600);
 });

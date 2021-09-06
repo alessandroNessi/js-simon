@@ -3,6 +3,9 @@
     margin: 0;
     box-sizing: border-box;
 }
+.d-none{
+    display: none;
+}
 body{
     background-color:mediumseagreen;
 }
