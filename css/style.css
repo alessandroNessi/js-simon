@@ -3,6 +3,9 @@
     margin: 0;
     box-sizing: border-box;
 }
+body{
+    background-color:mediumseagreen;
+}
 .tableTop{
     display: flex;
     flex-wrap: wrap;
@@ -12,6 +15,8 @@
     margin-top: 40px;
     background-color:burlywood;
     perspective: 1500px;/*gives a relative perspective to rotation, linked to preserve 3d*/
+    border: 5px solid lightslategray;
+    box-shadow: 5px 5px 20px;
 }
 .cardFrame{
     width: calc((100% / 5) - 20px);
@@ -37,21 +42,17 @@
     font-size: 90px;
     transform: rotateY(180deg);
 }   
-/* .backFrame{ */
-    /*makes it hidden as "backface"*/
-/* } */
 .backFrame img{
     width: 100%;
 }
-/* .tableTop:hover .cardFrame{ */
-    /*when i flip the whole card act like it has two faces*/
-/* } */
 .flip{
     transform: rotateY(180deg);
 }
 .playFrame{
-    margin:auto;
-    margin-bottom: 800px;
+    /* margin:auto; */
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
 }
 #play{
     border-radius: 10px;
