@@ -1,7 +1,7 @@
 /*global var */
 var aiNumbers=[];
 var userNumbers=[];
-
+var timeout=30000;
 /**function that flip cards */
 function flipCards(cards,type){
     if(type=="front"){
@@ -21,10 +21,12 @@ function randomNumber(min, max){
 }
 
 /* check if a string is in array */
-function checkArray(string, array){
+function checkArray(string, array, cut){
     for(let i=0;i<array.length;i++){
         if(string==array[i]){
-            array.splice(i,1);
+            if(cut==true){
+                array.splice(i,1);
+            }
             return true;
         }
     }
@@ -36,7 +38,7 @@ document.getElementById("play").addEventListener("mousedown",function(){
     /*populate cards numbers */
     for(let i=0;i<cards.length;i++){
         let temp=randomNumber(1,100);    
-        while(aiNumbers.includes(temp)){
+        while(checkArray(temp,aiNumbers)){
             temp=randomNumber(1,100);    
         }
         cards[i].getElementsByClassName("number")[0].innerHTML=temp;
@@ -49,14 +51,14 @@ document.getElementById("play").addEventListener("mousedown",function(){
     /*flip back cards and ask numbers */
     setTimeout(function(){
         flipCards(cards,"back");
-    },2000);
+    },timeout);
 
     setTimeout(function(){
         let result=1, num, i=0;
         // alert (userNumbers.length);
         while(result==1 && aiNumbers.length>0){
             num=parseInt(prompt(`inserisci il ${i+1} numero: `));
-            if(checkArray(num,aiNumbers)){
+            if(checkArray(num,aiNumbers,true)){
                 userNumbers.push(num);
                 i++;
             }else{
@@ -70,5 +72,5 @@ document.getElementById("play").addEventListener("mousedown",function(){
             alert(`You lost! The number ${num} was not in the cards!; ${userNumbers.length}/5 have been insered correctly: ${stringNumbers};`);
         }
         location.reload();
-    },2600);
+    },timeout+600);
 });
