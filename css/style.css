@@ -10,30 +10,37 @@
     height: 800px;
     margin: auto;
     margin-top: 40px;
-    perspective: 2000px;
+    perspective: 1500px;/*gives a relative perspective to rotation, linked to preserve 3d*/
 }
 .cardFrame{
     width: calc((100% / 5) - 20px);
-    height: calc(100% / 3);
+    height: calc(100% / 2.7);
     margin: 10px;
-    position: relative;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
+    position: relative;/*needed to keep the cards overlapped*/
+    transition: transform 0.6s; /*rotation transition*/
+    transform-style: preserve-3d;/*act like there are tow card face*/
 }
 .frontFrame, .backFrame{
-    position: absolute;
+    position: absolute;/*needed to keep the cards overlapped*/
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
+    backface-visibility: hidden;/*automatically hide the card in the back and merge it "naturally" in the backside of the rotation*/
 }
 .frontFrame{
-    background-color: seagreen;
+    background-image: url("../media/front.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 90px;
 }   
 .backFrame{
-    background-color: steelblue;
-    transform: rotateY(180deg);
+    transform: rotateY(180deg);/*makes it hidden as "backface"*/
+}
+.backFrame img{
+    width: 100%;
 }
 .tableTop:hover .cardFrame{
-    transform: rotateY(180deg);
-    /* backface-visibility: hidden; */
+    transform: rotateY(180deg);/*when i flip the whole card act like it has two faces*/
 }
