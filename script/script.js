@@ -1,7 +1,7 @@
 /*global var */
 var aiNumbers=[];
 var userNumbers=[];
-var timeout=3000;
+var timeout=30000;
 /**function that flip cards */
 function flipCards(cards,type){
     if(type=="front"){
