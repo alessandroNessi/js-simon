@@ -1,7 +1,7 @@
 /*global var */
 var aiNumbers=[];
 var userNumbers=[];
-var timeout=30000;
+var timeout=3000;
 /**function that flip cards */
 function flipCards(cards,type){
     if(type=="front"){
@@ -35,6 +35,7 @@ function checkArray(string, array, cut){
 document.getElementById("play").addEventListener("mousedown",function(){
     let cards=document.getElementsByClassName("cardFrame");
     document.getElementById("play").classList.add("d-none");
+    document.getElementById("results").classList.add("d-none");
     /*populate cards numbers */
     for(let i=0;i<cards.length;i++){
         let temp=randomNumber(1,100);    
@@ -67,15 +68,21 @@ document.getElementById("play").addEventListener("mousedown",function(){
                 result=0;
             }
             if(result==1 && aiNumbers.length==0){
-                alert("Gj, you won! All the numbers are correct!");
-                location.reload();
+                resumeClass();
+                document.getElementById("results").innerHTML="Gj, you win!";
             }else if(result==0){
                 let stringNumbers=userNumbers.join(" , ");
-                alert(`You lost! The number ${num} was not in the cards!; ${userNumbers.length}/5 have been insered correctly: ${stringNumbers};`);
-            location.reload();
+                resumeClass();
+                document.getElementById("results").innerHTML=`You lost! Number "${num}" isn't in the cards! ${userNumbers.length}/5 have been insered correctly: ${stringNumbers};`;
             }else{
                 document.getElementById("inpuNumber").value="";
             }
         });
     },timeout+600);
 });
+function resumeClass(){
+    document.getElementById("play").classList.remove("d-none");
+    document.getElementById("results").classList.remove("d-none");
+    document.getElementById("inpuNumber").classList.add("d-none");
+    document.getElementById("check").classList.add("d-none");
+}
